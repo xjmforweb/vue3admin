@@ -12,7 +12,9 @@
 </template>
 
 <script>
-import { ref, reactive, watch, shallowReactive, computed } from 'vue'
+import {
+  ref, reactive, watch, shallowReactive, computed,
+} from 'vue'
 import step1 from './step1.vue'
 import step2 from './step2.vue'
 
@@ -20,20 +22,20 @@ export default {
   name: 'templatesAddDialog',
   emits: ['update:modelValue'],
   props: ['modelValue'],
-  components: {step1, step2},
-  setup (props, { emit }) {
-    let form = reactive({
+  components: { step1, step2 },
+  setup(props, { emit }) {
+    const form = reactive({
       name: '',
       showName: '',
       note: '',
     })
-    let formDom = ref(null)
-    let step = ref(0)
-    let titles = ref(['参数配置', '字段配置', '筛选配置', '权限配置'])
+    const formDom = ref(null)
+    const step = ref(0)
+    const titles = ref(['参数配置', '字段配置', '筛选配置', '权限配置'])
 
-    let show = computed({
+    const show = computed({
       get() {
-        return props.modelValue;
+        return props.modelValue
       },
       set(v) {
         emit('update:modelValue', v)
@@ -59,8 +61,8 @@ export default {
       step,
       next,
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">

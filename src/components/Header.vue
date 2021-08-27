@@ -42,47 +42,48 @@
     </div>
 </template>
 <script>
-import { computed, onMounted } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
 export default {
-    setup() {
-        const username = localStorage.getItem("ms_username");
-        const message = 2;
+  setup() {
+    const username = localStorage.getItem('ms_username')
+    const message = 2
 
-        const store = useStore();
-        const collapse = computed(() => store.state.collapse);
-        // 侧边栏折叠
-        const collapseChage = () => {
-            store.commit("handleCollapse", !collapse.value);
-        };
+    const store = useStore()
+    const collapse = computed(() => store.state.collapse)
+    // 侧边栏折叠
+    const collapseChage = () => {
+      store.commit('handleCollapse', !collapse.value)
+    }
 
-        onMounted(() => {
-            if (document.body.clientWidth < 1500) {
-                collapseChage();
-            }
-        });
+    onMounted(() => {
+      if (document.body.clientWidth < 1500) {
+        collapseChage()
+      }
+    })
 
-        // 用户名下拉菜单选择事件
-        const router = useRouter();
-        const handleCommand = (command) => {
-            if (command == "loginout") {
-                localStorage.removeItem("ms_username");
-                router.push("/login");
-            } else if (command == "user") {
-                router.push("/user");
-            }
-        };
+    // 用户名下拉菜单选择事件
+    const router = useRouter()
+    const handleCommand = (command) => {
+      if (command == 'loginout') {
+        localStorage.removeItem('ms_username')
+        router.push('/login')
+      } else if (command == 'user') {
+        router.push('/user')
+      }
+    }
 
-        return {
-            username,
-            message,
-            collapse,
-            collapseChage,
-            handleCommand,
-        };
-    },
-};
+    return {
+      username,
+      message,
+      collapse,
+      collapseChage,
+      handleCommand,
+    }
+  },
+}
 </script>
 <style scoped>
 .header {

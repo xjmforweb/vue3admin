@@ -18,19 +18,19 @@ import { ref, reactive, shallowReactive } from 'vue'
 export default {
   name: 'templatesAddDialog1',
   props: ['form'],
-  setup (props, { emit }) {
-    let formDom = ref(null)
+  setup(props, { emit }) {
+    const formDom = ref(null)
     const rules = shallowReactive({
       name: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
-      showName: [{ required: true, message: '请输入活动名称', trigger: 'blur' }]
+      showName: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
     })
 
     return {
       rules,
       formDom,
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">

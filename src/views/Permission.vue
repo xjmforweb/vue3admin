@@ -20,8 +20,8 @@
 
 <script>
 export default {
-    name: "permission"
-};
+  name: 'permission',
+}
 </script>
 
 <style scoped>

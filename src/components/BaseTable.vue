@@ -26,7 +26,7 @@
       <el-pagination
           @current-change="handleCurrentChange"
           :page-size="size"
-          :current-page.sync="current"
+          v-model:current-page="current"
           layout="prev, pager, next, jumper, total"
           :total="total">
       </el-pagination>
@@ -34,51 +34,53 @@
   </div>
 </template>
 <script>
-import { ref, reactive, defineComponent, onMounted } from "vue";
+import {
+  ref, reactive, defineComponent, onMounted,
+} from 'vue'
 
 export default defineComponent({
-  name: "basetable",
+  name: 'basetable',
   props: {
     isShowSelection: {
       type: Boolean,
-      default: false
+      default: false,
     },
     immediate: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isShowSerialNumber: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isShowOperation: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isShowPagination: {
       type: Boolean,
-      default: true
+      default: true,
     },
     callback: Function,
     sort: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     query: {
       type: Object,
-      default: {}
+      default: {},
     },
     props: Array,
-    action: Function
+    action: Function,
   },
   emits: ['sortChange', 'selectionChange'],
   setup(props, { emit }) {
-    let loading = ref(false)
-    let tableData = ref([])
-    let total = ref(0)
-    let size = ref(10)
-    let current = ref(1)
-    let table = ref(null)
+    const loading = ref(false)
+    const tableData = ref([])
+    const total = ref(0)
+    const size = ref(10)
+    const current = ref(1)
+    const table = ref(null)
 
     const search = (i, isScroll) => {
       current.value = i > 0 ? i : current.value
@@ -91,9 +93,9 @@ export default defineComponent({
       const req = {
         pageNum: current.value,
         pageSize: size.value,
-        ...query
+        ...query,
       }
-      props.action(req).then(r => {
+      props.action(req).then((r) => {
         props.callback && props.callback(r) // 如果要对返回值做额外操作
         tableData.value = r.list
         total.value = r.pageTotal

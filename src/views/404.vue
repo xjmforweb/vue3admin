@@ -12,21 +12,21 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-export default {
-    name: "404",
-    setup() {
-        const router = useRouter();
-        const goBack = () => {
-            router.go(-1);
-        };
-        return {
-            goBack,
-        };
-    },
-};
-</script>
+import { useRouter } from 'vue-router'
 
+export default {
+  name: '404',
+  setup() {
+    const router = useRouter()
+    const goBack = () => {
+      router.go(-1)
+    }
+    return {
+      goBack,
+    }
+  },
+}
+</script>
 
 <style scoped>
 .error-page {

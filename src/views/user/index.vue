@@ -20,28 +20,28 @@ import addDialog from './addDialog.vue'
 
 export default {
   name: 'user',
-  components: {BaseTable, addDialog},
-  setup () {
-    let action = fetchData
-    let props = ref([
+  components: { BaseTable, addDialog },
+  setup() {
+    const action = fetchData
+    const props = ref([
       {
         label: '用户名',
-        prop: 'name'
+        prop: 'name',
       },
       {
         label: '登录名',
-        prop: 'state'
+        prop: 'state',
       },
       {
         label: '所属角色',
-        prop: 'id'
+        prop: 'id',
       },
       {
         label: '备注',
-        prop: 'id2'
-      }
+        prop: 'id2',
+      },
     ])
-    let dialogShow = ref(false)
+    const dialogShow = ref(false)
 
     const addNew = () => {
       dialogShow.value = true
@@ -51,10 +51,10 @@ export default {
       addNew,
       action,
       props,
-      dialogShow
+      dialogShow,
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">

@@ -78,90 +78,90 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue";
-import { ElMessage, ElMessageBox } from "element-plus";
-import { fetchData } from "../api/index";
+import { ref, reactive } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { fetchData } from '../api/index'
 
 export default {
-    name: "basetable",
-    setup() {
-        const query = reactive({
-            address: "",
-            name: "",
-            pageIndex: 1,
-            pageSize: 10,
-        });
-        const tableData = ref([]);
-        const pageTotal = ref(0);
-        // 获取表格数据
-        const getData = () => {
-            fetchData(query).then((res) => {
-                tableData.value = res.list;
-                pageTotal.value = res.pageTotal || 50;
-            });
-        };
-        getData();
+  name: 'basetable',
+  setup() {
+    const query = reactive({
+      address: '',
+      name: '',
+      pageIndex: 1,
+      pageSize: 10,
+    })
+    const tableData = ref([])
+    const pageTotal = ref(0)
+    // 获取表格数据
+    const getData = () => {
+      fetchData(query).then((res) => {
+        tableData.value = res.list
+        pageTotal.value = res.pageTotal || 50
+      })
+    }
+    getData()
 
-        // 查询操作
-        const handleSearch = () => {
-            query.pageIndex = 1;
-            getData();
-        };
-        // 分页导航
-        const handlePageChange = (val) => {
-            query.pageIndex = val;
-            getData();
-        };
+    // 查询操作
+    const handleSearch = () => {
+      query.pageIndex = 1
+      getData()
+    }
+    // 分页导航
+    const handlePageChange = (val) => {
+      query.pageIndex = val
+      getData()
+    }
 
-        // 删除操作
-        const handleDelete = (index) => {
-            // 二次确认删除
-            ElMessageBox.confirm("确定要删除吗？", "提示", {
-                type: "warning",
-            })
-                .then(() => {
-                    ElMessage.success("删除成功");
-                    tableData.value.splice(index, 1);
-                })
-                .catch(() => {});
-        };
+    // 删除操作
+    const handleDelete = (index) => {
+      // 二次确认删除
+      ElMessageBox.confirm('确定要删除吗？', '提示', {
+        type: 'warning',
+      })
+        .then(() => {
+          ElMessage.success('删除成功')
+          tableData.value.splice(index, 1)
+        })
+        .catch(() => {})
+    }
 
-        // 表格编辑时弹窗和保存
-        const editVisible = ref(false);
-        let form = reactive({
-            name: "",
-            address: "",
-        });
-        let idx = -1;
-        const handleEdit = (index, row) => {
-            idx = index;
-            Object.keys(form).forEach((item) => {
-                form[item] = row[item];
-            });
-            editVisible.value = true;
-        };
-        const saveEdit = () => {
-            editVisible.value = false;
-            ElMessage.success(`修改第 ${idx + 1} 行成功`);
-            Object.keys(form).forEach((item) => {
-                tableData.value[idx][item] = form[item];
-            });
-        };
+    // 表格编辑时弹窗和保存
+    const editVisible = ref(false)
+    const form = reactive({
+      name: '',
+      address: '',
+    })
+    let idx = -1
+    const handleEdit = (index, row) => {
+      idx = index
+      Object.keys(form).forEach((item) => {
+        form[item] = row[item]
+      })
+      editVisible.value = true
+    }
+    const saveEdit = () => {
+      editVisible.value = false
+      ElMessage.success(`修改第 ${idx + 1} 行成功`)
+      Object.keys(form).forEach((item) => {
+        tableData.value[idx][item] = form[item]
+      })
+    }
 
-        return {
-            query,
-            tableData,
-            pageTotal,
-            editVisible,
-            form,
-            handleSearch,
-            handlePageChange,
-            handleDelete,
-            handleEdit,
-            saveEdit,
-        };
-    },
-};
+    return {
+      query,
+      tableData,
+      pageTotal,
+      editVisible,
+      form,
+      handleSearch,
+      handlePageChange,
+      handleDelete,
+      handleEdit,
+      saveEdit,
+    }
+  },
+}
 </script>
 
 <style scoped>

@@ -22,8 +22,8 @@ import { ref, reactive, shallowReactive } from 'vue'
 export default {
   name: 'templatesAddDialog1',
   props: ['form'],
-  setup (props, { emit }) {
-    let data = ref([])
+  setup(props, { emit }) {
+    const data = ref([])
 
     const add = () => {
       data.value.push({})
@@ -33,8 +33,8 @@ export default {
       data,
       add,
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">

@@ -21,27 +21,29 @@
 </template>
 
 <script>
-import { ref, reactive, watch, shallowReactive, computed } from 'vue'
+import {
+  ref, reactive, watch, shallowReactive, computed,
+} from 'vue'
 
 export default {
   name: 'addWordDialog',
   emits: ['update:modelValue'],
   props: ['modelValue'],
-  setup (props, { emit }) {
-    let form = reactive({
+  setup(props, { emit }) {
+    const form = reactive({
       name: '',
       showName: '',
       note: '',
     })
-    let formDom = ref(null)
+    const formDom = ref(null)
     const rules = shallowReactive({
       name: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
-      showName: [{ required: true, message: '请输入活动名称', trigger: 'blur' }]
+      showName: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
     })
 
-    let show = computed({
+    const show = computed({
       get() {
-        return props.modelValue;
+        return props.modelValue
       },
       set(v) {
         emit('update:modelValue', v)
@@ -63,8 +65,8 @@ export default {
       formDom,
       next,
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">

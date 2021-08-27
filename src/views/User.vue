@@ -62,74 +62,75 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
-import VueCropper from "vue-cropperjs";
-import "cropperjs/dist/cropper.css";
-import avatar from "../assets/img/img.jpg";
+import { reactive, ref } from 'vue'
+import VueCropper from 'vue-cropperjs'
+import 'cropperjs/dist/cropper.css'
+import avatar from '../assets/img/img.jpg'
+
 export default {
-    name: "user1",
-    components: {
-        VueCropper,
-    },
-    setup() {
-        const name = localStorage.getItem("ms_username");
-        const form = reactive({
-            old: "",
-            new: "",
-            desc: "不可能！我的代码怎么可能会有bug！",
-        });
-        const onSubmit = () => {};
+  name: 'user1',
+  components: {
+    VueCropper,
+  },
+  setup() {
+    const name = localStorage.getItem('ms_username')
+    const form = reactive({
+      old: '',
+      new: '',
+      desc: '不可能！我的代码怎么可能会有bug！',
+    })
+    const onSubmit = () => {}
 
-        const avatarImg = ref(avatar);
-        const imgSrc = ref("");
-        const cropImg = ref("");
-        const dialogVisible = ref(false);
-        const cropper = ref(null);
+    const avatarImg = ref(avatar)
+    const imgSrc = ref('')
+    const cropImg = ref('')
+    const dialogVisible = ref(false)
+    const cropper = ref(null)
 
-        const showDialog = () => {
-            dialogVisible.value = true;
-            imgSrc.value = avatarImg.value;
-        };
+    const showDialog = () => {
+      dialogVisible.value = true
+      imgSrc.value = avatarImg.value
+    }
 
-        const setImage = (e) => {
-            const file = e.target.files[0];
-            if (!file.type.includes("image/")) {
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                dialogVisible.value = true;
-                imgSrc.value = event.target.result;
-                cropper.value && cropper.value.replace(event.target.result);
-            };
-            reader.readAsDataURL(file);
-        };
+    const setImage = (e) => {
+      const file = e.target.files[0]
+      if (!file.type.includes('image/')) {
+        return
+      }
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        dialogVisible.value = true
+        imgSrc.value = event.target.result
+        cropper.value && cropper.value.replace(event.target.result)
+      }
+      reader.readAsDataURL(file)
+    }
 
-        const cropImage = () => {
-            cropImg.value = cropper.value.getCroppedCanvas().toDataURL();
-        };
+    const cropImage = () => {
+      cropImg.value = cropper.value.getCroppedCanvas().toDataURL()
+    }
 
-        const saveAvatar = () => {
-            avatarImg.value = cropImg.value;
-            dialogVisible.value = false;
-        };
+    const saveAvatar = () => {
+      avatarImg.value = cropImg.value
+      dialogVisible.value = false
+    }
 
-        return {
-            name,
-            form,
-            onSubmit,
-            cropper,
-            avatarImg,
-            imgSrc,
-            cropImg,
-            showDialog,
-            dialogVisible,
-            setImage,
-            cropImage,
-            saveAvatar,
-        };
-    },
-};
+    return {
+      name,
+      form,
+      onSubmit,
+      cropper,
+      avatarImg,
+      imgSrc,
+      cropImg,
+      showDialog,
+      dialogVisible,
+      setImage,
+      cropImage,
+      saveAvatar,
+    }
+  },
+}
 </script>
 
 <style scoped>

@@ -16,24 +16,24 @@ import addDialog from './addDialog.vue'
 
 export default {
   name: 'templates',
-  components: {BaseTable, addDialog},
-  setup () {
-    let action = fetchData
-    let props = ref([
+  components: { BaseTable, addDialog },
+  setup() {
+    const action = fetchData
+    const props = ref([
       {
         label: 'test',
-        prop: 'name'
+        prop: 'name',
       },
       {
         label: 'test2',
-        prop: 'state'
+        prop: 'state',
       },
       {
         label: 'test3',
-        prop: 'id'
-      }
+        prop: 'id',
+      },
     ])
-    let dialogShow = ref(false)
+    const dialogShow = ref(false)
 
     const addNew = () => {
       dialogShow.value = true
@@ -43,10 +43,10 @@ export default {
       addNew,
       action,
       props,
-      dialogShow
+      dialogShow,
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">
