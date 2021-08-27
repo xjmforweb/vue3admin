@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue'
 import BaseTable from '../../components/BaseTable.vue'
 import { fetchData } from '../../api/index'
@@ -18,7 +18,7 @@ export default {
   name: 'templates',
   components: { BaseTable, addDialog },
   setup() {
-    const action = fetchData
+    const action: void = fetchData
     const props = ref([
       {
         label: 'test',
