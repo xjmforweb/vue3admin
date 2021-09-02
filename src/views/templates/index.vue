@@ -18,7 +18,7 @@ export default {
   name: 'templates',
   components: { BaseTable, addDialog },
   setup() {
-    const action: void = fetchData
+    const action: any = fetchData
     const props = ref([
       {
         label: 'test',
@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .add {
   display: flex;
   justify-content: flex-end;
